@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:account="http://www.manishjavadev.com/schema/Account"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.manishjavadev.com/service/Accounts/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="Accounts" targetNamespace="http://www.manishjavadev.com/service/Accounts/">
+	
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.manishjavadev.com/service/Accounts/">
+			<xsd:import namespace="http://www.manishjavadev.com/schema/Account"
+				schemaLocation="../xsd/Account.xsd"></xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="ProcessAccountInquryRequest">
+		<wsdl:part element="account:accountInquiryRequest" name="accountInquiryRequest" />
+	</wsdl:message>
+	
+	<wsdl:message name="ProcessAccountInquryResponse">
+		<wsdl:part element="account:accountInquiryResponse" name="accountInquiryResponse" />
+	</wsdl:message>
+	
+	<wsdl:portType name="Accounts">
+		<wsdl:operation name="ProcessAccountInqury">
+			<wsdl:input message="tns:ProcessAccountInquryRequest" />
+			<wsdl:output message="tns:ProcessAccountInquryResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="AccountsSOAP" type="tns:Accounts">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="ProcessAccountInqury">
+			<soap:operation
+				soapAction="http://www.manishjavadev.com/service/Accounts/ProcessAccountInqury" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="Accounts">
+		<wsdl:port binding="tns:AccountsSOAP" name="AccountsSOAP">
+			<soap:address
+				location="http://localhost:8080/jax-ws-apache-cxf-account-service-demo/services/accounts" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
