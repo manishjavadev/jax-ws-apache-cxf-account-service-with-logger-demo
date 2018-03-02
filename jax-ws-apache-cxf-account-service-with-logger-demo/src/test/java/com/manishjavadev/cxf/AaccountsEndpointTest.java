@@ -17,20 +17,38 @@ import com.manishjavadev.schema.account.AccountInquiryRequestType;
 import com.manishjavadev.schema.account.AccountInquiryResponseType;
 import com.manishjavadev.service.accounts.Accounts;
 
+/**
+ * The @RunWith annotation tells jUnit to use the Spring jUnit 4 test runner for
+ * exection of the tests. @RunWith(SpringJUnit4ClassRunner.class)
+ * 
+ * 
+ * The @ContextConfiguration annotation provides the classpath to the test
+ * spring configuration file.
+ * 
+ * @author Manish
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:test-applicationContext.xml" })
 public class AaccountsEndpointTest {
-	// Interface for the Orders web
+	// Interface for the Account web service
 	private Accounts accounts;
 
 	// Input parameter to the web service.
 	private AccountInquiryRequestType accountInquiryRequestType;
 
+	/**
+	 * org.apache.cxf.jaxws.spring.
+	 * JaxWsProxyFactoryBeanDefinitionParser$JAXWSSpringClientProxyFactoryBean
+	 * 
+	 * This will use to create JaxWsClientProxy
+	 */
 	@Autowired
 	private JaxWsProxyFactoryBean testAccountClient;
 
 	@Before
 	public void setUp() throws Exception {
+		// Creating JaxWsClientProxy object
 		accounts = testAccountClient.create(Accounts.class);
 
 		accountInquiryRequestType = new AccountInquiryRequestType();
@@ -52,7 +70,6 @@ public class AaccountsEndpointTest {
 
 	@Test(expected = SOAPFaultException.class)
 	public void testProcessAccountInquryException() {
-		accountInquiryRequestType.setAccountType("Wrong Type");
 		AccountInquiryResponseType accResponseType = accounts.processAccountInqury(null);
 		assertTrue(accResponseType.getAccountResponseType().getAccountInfo().getAccountId() == 1234);
 		System.out.println("Done");
