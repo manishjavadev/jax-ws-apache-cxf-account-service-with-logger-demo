@@ -8,16 +8,14 @@
         http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
-
-
 	<context:component-scan base-package="com.manishjavadev.cxf" />
 
-	<bean id="defaultOrdersEndpoint" class="com.manishjavadev.cxf.AaccountsEndpointTest" />
+	<bean id="defaultAccountEndpoint" class="com.manishjavadev.cxf.AaccountsEndpoint" />
 
 	<!-- CXF JAX-WS server configuration -->
-	<jaxws:server id="testOrdersServer"
-		address="http://localhost:9090/jax-ws-apache-cxf-account-service-demo/services/accounts"
-		serviceBean="#defaultOrdersEndpoint" serviceClass="com.manishjavadev.service.accounts.Accounts">
+	<jaxws:server id="testAccountServer"
+		address="http://localhost:9000/jax-ws-apache-cxf-account-service-demo/services/accounts"
+		serviceBean="#defaultAccountEndpoint" serviceClass="com.manishjavadev.service.accounts.Accounts">
 		<jaxws:inInterceptors>
 			<ref bean="loggingInInterceptor" />
 		</jaxws:inInterceptors>
@@ -31,8 +29,8 @@
 	<bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
 
 	<!-- CXF JAX-WS client configuration. -->
-	<jaxws:client id="testOrdersClient"
-		address="http://localhost:9090/jax-ws-apache-cxf-account-service-demo/services/accounts"
+	<jaxws:client id="testAccountClient"
+		address="http://localhost:9000/jax-ws-apache-cxf-account-service-demo/services/accounts"
 		serviceClass="com.manishjavadev.service.accounts.Accounts">
 		<jaxws:inInterceptors>
 			<ref bean="loggingInInterceptor" />
@@ -41,6 +39,4 @@
 			<ref bean="loggingOutInterceptor" />
 		</jaxws:outInterceptors>
 	</jaxws:client>
-
-
 </beans>

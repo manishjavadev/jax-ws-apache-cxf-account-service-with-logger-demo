@@ -40,7 +40,7 @@ public class AaccountsEndpointTest {
 
 	@After
 	public void tearDown() throws Exception {
-
+		accounts = null;
 	}
 
 	@Test
