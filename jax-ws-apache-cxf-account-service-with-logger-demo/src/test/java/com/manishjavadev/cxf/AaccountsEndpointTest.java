@@ -27,11 +27,11 @@ public class AaccountsEndpointTest {
 	private AccountInquiryRequestType accountInquiryRequestType;
 
 	@Autowired
-	private JaxWsProxyFactoryBean testOrderClient;
+	private JaxWsProxyFactoryBean testAccountClient;
 
 	@Before
 	public void setUp() throws Exception {
-		accounts = testOrderClient.create(Accounts.class);
+		accounts = testAccountClient.create(Accounts.class);
 
 		accountInquiryRequestType = new AccountInquiryRequestType();
 		accountInquiryRequestType.setUniqueAccountId(1234);
